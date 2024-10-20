@@ -1,4 +1,4 @@
-import Slideshow from "@/components/slideshow";
+import Slideshow from "@/components/slideshow/slideshow";
 import { fetchEvents } from "@/lib/crawler";
 
 const EventsPage = async () => {
