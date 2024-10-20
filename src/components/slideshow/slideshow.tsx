@@ -49,11 +49,13 @@ export default function Slideshow({
 			/>
 			<AgvLogo isDarkBackground={isDarkBackground} />
 			<EventInfo event={currentEvent} />
-			<SlideIndicators
-				events={events}
-				currentSlide={currentSlide}
-				isDarkBackground={isDarkBackground}
-			/>
+			{events.length > 1 && (
+				<SlideIndicators
+					events={events}
+					currentSlide={currentSlide}
+					isDarkBackground={isDarkBackground}
+				/>
+			)}
 		</div>
 	);
 }
