@@ -8,15 +8,16 @@ import EventInfo from "./EventInfo";
 import SlideIndicators from "./SlideIndicators";
 
 export default function Slideshow({
-	events = [],
-	slideDuration = 8000,
-}: { events: AgvEvent[]; slideDuration?: number }) {
+	events,
+	slideDuration,
+}: {
+	events: AgvEvent[];
+	slideDuration: number;
+}) {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isDarkBackground, setIsDarkBackground] = useState(true);
 
 	useEffect(() => {
-		if (events.length === 0) return;
-
 		const interval = setInterval(() => {
 			setCurrentSlide((prev) => (prev + 1) % events.length);
 		}, slideDuration);
@@ -38,18 +39,10 @@ export default function Slideshow({
 		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, [events.length]);
 
-	if (events.length === 0) {
-		return (
-			<div className="h-screen flex items-center justify-center bg-black text-white font-sans">
-				No events to display
-			</div>
-		);
-	}
-
 	const currentEvent = events[currentSlide];
 
 	return (
-		<div className="relative overflow-hidden h-screen bg-black font-sans">
+		<div className="relative overflow-hidden h-screen bg-black font-sans slideshow">
 			<BackgroundImage
 				event={currentEvent}
 				onColorAnalysis={setIsDarkBackground}

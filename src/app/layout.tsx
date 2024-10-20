@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
@@ -12,10 +13,12 @@ export default async function RootLayout({
 	children,
 }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={roboto.className}>
+		<html lang="en">
 			<head />
-			<body>
-				<main className="min-h-screen h-screen antialiased">{children}</main>
+			<body
+				className={cn("min-h-screen h-screen antialiased", roboto.className)}
+			>
+				{children}
 			</body>
 		</html>
 	);
