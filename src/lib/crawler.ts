@@ -1,7 +1,7 @@
 import he from "he";
 import { stripHtml } from "string-strip-html";
+import { formatDate } from "./date";
 import type { AgvEvent } from "./event";
-import { formatDate } from "./utils/date";
 
 interface TribeEvent {
 	id: number;

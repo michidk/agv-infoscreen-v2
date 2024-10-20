@@ -2,21 +2,17 @@
 
 import type { AgvEvent } from "@/lib/event";
 import { useEffect, useState } from "react";
-import { AgvLogo } from "./AgvLogo";
-import { BackgroundImage } from "./BackgroundImage";
-import { EventInfo } from "./EventInfo";
-import { SlideIndicators } from "./SlideIndicators";
-
-interface SlideshowProps {
-	events: AgvEvent[];
-	slideDuration?: number;
-}
+import AgvLogo from "./AgvLogo";
+import BackgroundImage from "./BackgroundImage";
+import EventInfo from "./EventInfo";
+import SlideIndicators from "./SlideIndicators";
 
 export default function Slideshow({
 	events = [],
 	slideDuration = 8000,
-}: SlideshowProps) {
+}: { events: AgvEvent[]; slideDuration?: number }) {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isDarkBackground, setIsDarkBackground] = useState(true);
 
 	useEffect(() => {
 		if (events.length === 0) return;
@@ -54,10 +50,17 @@ export default function Slideshow({
 
 	return (
 		<div className="relative overflow-hidden h-screen bg-black font-sans">
-			<BackgroundImage event={currentEvent} />
-			<AgvLogo />
+			<BackgroundImage
+				event={currentEvent}
+				onColorAnalysis={setIsDarkBackground}
+			/>
+			<AgvLogo isDarkBackground={isDarkBackground} />
 			<EventInfo event={currentEvent} />
-			<SlideIndicators events={events} currentSlide={currentSlide} />
+			<SlideIndicators
+				events={events}
+				currentSlide={currentSlide}
+				isDarkBackground={isDarkBackground}
+			/>
 		</div>
 	);
 }
