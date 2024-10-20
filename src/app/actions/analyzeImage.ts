@@ -11,7 +11,7 @@ export async function analyzeImage(imageUrl: string): Promise<boolean> {
 		const metadata = await sharp(buffer).metadata();
 		const height = metadata.height || 0;
 
-		const { data, info } = await sharp(buffer)
+		const { data } = await sharp(buffer)
 			.resize({ height: Math.round(height * 0.2) })
 			.raw()
 			.toBuffer({ resolveWithObject: true });

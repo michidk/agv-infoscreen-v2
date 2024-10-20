@@ -27,24 +27,29 @@ async function DebugPage() {
 									<strong>Musengruppe:</strong> {event.musengruppe}
 								</p>
 							)}
-							{event.date && (
-								<p className="mb-1">
-									<strong>Date:</strong> {event.date}
-								</p>
-							)}
-							{event.venue && (
-								<p className="mb-1">
-									<strong>Venue:</strong> {event.venue}
-								</p>
-							)}
+							{event.eventDetails.map((detail) => (
+								<div
+									key={`${detail.date}-${detail.venue}-${detail.cost}`}
+									className="mb-2"
+								>
+									<p className="mb-1">
+										<strong>Date:</strong> {detail.date}
+									</p>
+									{detail.venue && (
+										<p className="mb-1">
+											<strong>Venue:</strong> {detail.venue}
+										</p>
+									)}
+									{detail.cost && (
+										<p className="mb-1">
+											<strong>Cost:</strong> {detail.cost}
+										</p>
+									)}
+								</div>
+							))}
 							{event.excerpt && (
 								<p className="mb-1">
 									<strong>Excerpt:</strong> {event.excerpt}
-								</p>
-							)}
-							{event.cost && (
-								<p className="mb-1">
-									<strong>Cost:</strong> {event.cost}
 								</p>
 							)}
 							<p className="mb-1">

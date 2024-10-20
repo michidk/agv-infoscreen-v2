@@ -18,16 +18,42 @@ export default function EventInfo({ event }: { event: AgvEvent }) {
 					<h2 className="text-7xl font-bold text-white leading-tight">
 						{event.title}
 					</h2>
-					{event.date && <p className="text-4xl text-gray-200">{event.date}</p>}
-					{(event.venue || event.cost) && (
-						<p className="text-2xl text-gray-300">
-							{event.venue && event.venue}
-							{event.venue && event.cost && " — "}
-							{event.cost && event.cost}
-						</p>
+					{event.eventDetails.length === 1 ? (
+						<>
+							{event.eventDetails[0].date && (
+								<p className="text-4xl text-gray-200">
+									{event.eventDetails[0].date}
+								</p>
+							)}
+							{(event.eventDetails[0].venue || event.eventDetails[0].cost) && (
+								<p className="text-2xl text-gray-300">
+									{event.eventDetails[0].venue && event.eventDetails[0].venue}
+									{event.eventDetails[0].venue &&
+										event.eventDetails[0].cost &&
+										" — "}
+									{event.eventDetails[0].cost && event.eventDetails[0].cost}
+								</p>
+							)}
+						</>
+					) : (
+						<div className="space-y-2">
+							{event.eventDetails.map((detail) => (
+								<div
+									key={`${detail.date}-${detail.venue}`}
+									className="text-gray-300 text-2xl"
+								>
+									<p>{detail.date}</p>
+									<p>
+										{detail.venue && detail.venue}
+										{detail.venue && detail.cost && " — "}
+										{detail.cost && detail.cost}
+									</p>
+								</div>
+							))}
+						</div>
 					)}
 					{event.excerpt && (
-						<p className="text-1xl text-gray-300">{event.excerpt}</p>
+						<p className="text-2xl text-gray-300">{event.excerpt}</p>
 					)}
 				</div>
 				{event.mgUrl && (
